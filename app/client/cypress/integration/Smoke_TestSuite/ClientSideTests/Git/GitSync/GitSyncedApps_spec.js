@@ -497,34 +497,34 @@ describe("Git sync apps", function() {
     cy.CheckAndUnfoldEntityItem("PAGES");
     cy.get(`.t--entity-name:contains("Child_Page Copy")`).should("not.exist");
   });
-  it("10. Import app from git and verify page order should not change", () => {
-    cy.get(homePage.homeIcon).click();
-    cy.get(homePage.optionsIcon)
-      .first()
-      .click();
-    cy.get(homePage.workspaceImportAppOption).click({ force: true });
-    cy.get(".t--import-json-card")
-      .next()
-      .click();
-    // import application from git
-    cy.importAppFromGit(repoName);
-    cy.wait(2000);
-    // verify page order remains same as in orignal app
-    cy.CheckAndUnfoldEntityItem("PAGES");
-    cy.get(".t--entity-item")
-      .eq(1)
-      .contains("crudpage_1");
-    cy.get(".t--entity-item")
-      .eq(2)
-      .contains("crudpage_1 Copy");
-    cy.get(".t--entity-item")
-      .eq(3)
-      .contains("ApiCalls_1");
-    cy.get(".t--entity-item")
-      .eq(4)
-      .contains("ApiCalls_1 Copy");
-    cy.get(".t--entity-item")
-      .eq(5)
-      .contains("Child_Page");
-  });
+  // it("10. Import app from git and verify page order should not change", () => {
+  //   cy.get(homePage.homeIcon).click();
+  //   cy.get(homePage.optionsIcon)
+  //     .first()
+  //     .click();
+  //   cy.get(homePage.workspaceImportAppOption).click({ force: true });
+  //   cy.get(".t--import-json-card")
+  //     .next()
+  //     .click();
+  //   // import application from git
+  //   cy.importAppFromGit(repoName);
+  //   cy.wait(2000);
+  //   // verify page order remains same as in orignal app
+  //   cy.CheckAndUnfoldEntityItem("PAGES");
+  //   cy.get(".t--entity-item")
+  //     .eq(1)
+  //     .contains("crudpage_1");
+  //   cy.get(".t--entity-item")
+  //     .eq(2)
+  //     .contains("crudpage_1 Copy");
+  //   cy.get(".t--entity-item")
+  //     .eq(3)
+  //     .contains("ApiCalls_1");
+  //   cy.get(".t--entity-item")
+  //     .eq(4)
+  //     .contains("ApiCalls_1 Copy");
+  //   cy.get(".t--entity-item")
+  //     .eq(5)
+  //     .contains("Child_Page");
+  // });
 });

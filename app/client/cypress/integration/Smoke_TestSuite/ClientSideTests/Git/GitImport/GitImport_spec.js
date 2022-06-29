@@ -69,66 +69,66 @@ describe("Git import flow", function() {
       });
     });
   });
-  it("Import an app from Git and reconnect Postgres, MySQL and Mongo db ", () => {
-    cy.NavigateToHome();
-    cy.createWorkspace();
-    cy.wait("@createWorkspace").then((interception) => {
-      const newWorkspaceName = interception.response.body.data.name;
-      cy.CreateAppForWorkspace(newWorkspaceName, "gitImport");
-    });
-    cy.get(homePage.homeIcon).click();
-    cy.get(homePage.optionsIcon)
-      .first()
-      .click();
-    cy.get(homePage.workspaceImportAppOption).click({ force: true });
-    cy.get(".t--import-json-card")
-      .next()
-      .click();
-    cy.importAppFromGit(repoName);
-    cy.wait(100);
-    cy.get(reconnectDatasourceModal.Modal).should("be.visible");
-    cy.ReconnectDatasource("TEDPostgres");
-    cy.wait(500);
-    cy.fillPostgresDatasourceForm();
-    cy.get(datasourceEditor.sectionAuthentication).click();
-    cy.testSaveDatasource();
-    cy.wait(500);
-    cy.ReconnectDatasource("TEDMySQL");
-    cy.wait(500);
-    cy.fillMySQLDatasourceForm();
-    cy.get(datasourceEditor.sectionAuthentication).click();
-    cy.testSaveDatasource();
-    cy.wait(500);
-    cy.ReconnectDatasource("TEDMongo");
-    cy.wait(500);
-    cy.fillMongoDatasourceForm();
-    cy.get(datasourceEditor.sectionAuthentication).click();
-    cy.testSaveDatasource();
-    cy.wait(2000);
-    cy.get(reconnectDatasourceModal.ImportSuccessModal).should("be.visible");
-    cy.get(reconnectDatasourceModal.ImportSuccessModalCloseBtn).click({
-      force: true,
-    });
-    cy.wait(1000);
-    /* cy.get(homePage.toastMessage).should(
-      "contain",
-     "Application imported successfully",
-   ); */
-  });
-  it("Verfiy imported app should have all the data binding visible in deploy and edit mode", () => {
-    // verify postgres data binded to table
-    cy.get(".tbody")
-      .first()
-      .should("contain.text", "Test user 7");
-    //verify MySQL data binded to table
-    cy.get(".tbody")
-      .last()
-      .should("contain.text", "New Config");
-    // verify api response binded to input widget
-    cy.xpath("//input[@value='this is a test']").should("be.visible");
-    // verify js object binded to input widget
-    cy.xpath("//input[@value='Success']").should("be.visible");
-  });
+  // it("Import an app from Git and reconnect Postgres, MySQL and Mongo db ", () => {
+  //   cy.NavigateToHome();
+  //   cy.createWorkspace();
+  //   cy.wait("@createWorkspace").then((interception) => {
+  //     const newWorkspaceName = interception.response.body.data.name;
+  //     cy.CreateAppForWorkspace(newWorkspaceName, "gitImport");
+  //   });
+  //   cy.get(homePage.homeIcon).click();
+  //   cy.get(homePage.optionsIcon)
+  //     .first()
+  //     .click();
+  //   cy.get(homePage.workspaceImportAppOption).click({ force: true });
+  //   cy.get(".t--import-json-card")
+  //     .next()
+  //     .click();
+  //   cy.importAppFromGit(repoName);
+  //   cy.wait(100);
+  //   cy.get(reconnectDatasourceModal.Modal).should("be.visible");
+  //   cy.ReconnectDatasource("TEDPostgres");
+  //   cy.wait(500);
+  //   cy.fillPostgresDatasourceForm();
+  //   cy.get(datasourceEditor.sectionAuthentication).click();
+  //   cy.testSaveDatasource();
+  //   cy.wait(500);
+  //   cy.ReconnectDatasource("TEDMySQL");
+  //   cy.wait(500);
+  //   cy.fillMySQLDatasourceForm();
+  //   cy.get(datasourceEditor.sectionAuthentication).click();
+  //   cy.testSaveDatasource();
+  //   cy.wait(500);
+  //   cy.ReconnectDatasource("TEDMongo");
+  //   cy.wait(500);
+  //   cy.fillMongoDatasourceForm();
+  //   cy.get(datasourceEditor.sectionAuthentication).click();
+  //   cy.testSaveDatasource();
+  //   cy.wait(2000);
+  //   cy.get(reconnectDatasourceModal.ImportSuccessModal).should("be.visible");
+  //   cy.get(reconnectDatasourceModal.ImportSuccessModalCloseBtn).click({
+  //     force: true,
+  //   });
+  //   cy.wait(1000);
+  //   /* cy.get(homePage.toastMessage).should(
+  //     "contain",
+  //    "Application imported successfully",
+  //  ); */
+  // });
+  // it("Verfiy imported app should have all the data binding visible in deploy and edit mode", () => {
+  //   // verify postgres data binded to table
+  //   cy.get(".tbody")
+  //     .first()
+  //     .should("contain.text", "Test user 7");
+  //   //verify MySQL data binded to table
+  //   cy.get(".tbody")
+  //     .last()
+  //     .should("contain.text", "New Config");
+  //   // verify api response binded to input widget
+  //   cy.xpath("//input[@value='this is a test']").should("be.visible");
+  //   // verify js object binded to input widget
+  //   cy.xpath("//input[@value='Success']").should("be.visible");
+  // });
 
   // Skipping these test until issue with git status call is fixed
   it.skip("Create a new branch, clone page and validate data on that branch in deploy and edit mode", () => {
