@@ -2,11 +2,8 @@ import {
   NotificationBannerContainer,
   StyledTextBlock,
 } from "./StyledComponents";
-import {
-  NotificationBanner,
-  NotificationVariant,
-  TextType,
-} from "components/ads";
+import { NotificationBanner, NotificationVariant } from "components/ads";
+import { TextType } from "design-system";
 import { Colors } from "constants/Colors";
 import {
   createMessage,

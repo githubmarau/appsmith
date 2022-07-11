@@ -6,7 +6,8 @@ import {
   REGENERATE_KEY_CONFIRM_MESSAGE,
   YES,
 } from "@appsmith/constants/messages";
-import { Button, Category, Size, Text, TextType } from "components/ads";
+import { Button, Category, Size } from "components/ads";
+import { Text, TextType } from "design-system";
 
 /**
  * getConfirmMenuItem
